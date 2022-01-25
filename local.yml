@@ -1,0 +1,26 @@
+- hosts: localhost
+  become: true
+  pre_tasks:
+    # - name: Update cache
+    #   apt:
+    #     update_cache: true
+    #   tags:
+    #   - zsh
+    #   - node
+
+  tasks:
+    - include: tasks/zsh.yml
+    - include: tasks/node.yml
+    - include: tasks/stow.yml
+    - name: Installing i3 and conf
+      apt: 
+        name: ['i3','compton','feh','brightnessctl','i3blocks','rofi','lxappearance','arandr', 'ansible']
+
+    - name: Installing Bluetooth GUI
+      apt: 
+        name: ['bluez','bluez-tools','blueman']
+      
+    - name: Installing stow
+      apt: name=feh
+      tags:
+        - install
